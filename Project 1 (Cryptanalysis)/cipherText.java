@@ -6,8 +6,10 @@
  * the object to get the cipher text.
  **/
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class cipherText {
     final String cipherText;
@@ -26,26 +28,30 @@ public class cipherText {
     }
 
     /**
-     * Reads the cipher text from a file and returns it as a string.
+     * Reads the cipher text from a file and returns it as a string,
+     * while preserving spaces and new lines.
      * 
      * @param fileName the name of the file containing the cipher text
      * @return the cipher text as a string
      */
     private String readCipherText(String fileName) {
-        String cipherText = "";
+        StringBuilder sb = new StringBuilder();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
             String line = reader.readLine();
             while (line != null) {
-                cipherText += line;
+                sb.append(line);
+                sb.append(System.lineSeparator());
                 line = reader.readLine();
+                System.out.println(line);
             }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return cipherText;
-    } // end readCipherText
+
+        return sb.toString();
+    }
 
     /**
      * Returns the cipher text as a string.
