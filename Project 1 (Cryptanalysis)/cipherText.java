@@ -6,13 +6,12 @@
  * the object to get the cipher text.
  **/
 import java.io.BufferedReader;
-import java.io.FileInputStream;
+import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.FileWriter;
 
 public class cipherText {
-    final String cipherText;
+    final StringBuilder cipherText;
     final letterFrequencyObject[] letterFrequency, sortedLetterFrequency;
 
     /**
@@ -34,32 +33,29 @@ public class cipherText {
      * @param fileName the name of the file containing the cipher text
      * @return the cipher text as a string
      */
-    private String readCipherText(String fileName) {
-        StringBuilder sb = new StringBuilder();
+    private StringBuilder readCipherText(String fileName) {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), "UTF-8"));
-            String line = reader.readLine();
-            while (line != null) {
-                sb.append(line);
-                sb.append(System.lineSeparator());
-                line = reader.readLine();
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+            StringBuilder cipherText = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                cipherText.append(line).append("\n"); // This will preserve line breaks
             }
             reader.close();
-        } catch (IOException e) {
+
+            // Output the cipher text to uniquie file
+            String outputFileName = "JoeyCipherTextTest.txt";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
+            writer.write(cipherText.toString());
+            writer.close();
+            System.out.println("Cipher text written to " + outputFileName);
+
+            return cipherText;
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return sb.toString();
     }
-
-    /**
-     * Returns the cipher text as a string.
-     * 
-     * @return the cipher text as a string
-     */
-    public String getCipherText() {
-        return this.cipherText;
-    } // end getCipherText
 
     /**
      * Performs frequency analysis on the cipher text and returns the results as
