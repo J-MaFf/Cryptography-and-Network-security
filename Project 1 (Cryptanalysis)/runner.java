@@ -1,13 +1,13 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class runner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         System.out.println("Running program...");
-
         cipherText cipherText = new cipherText("JoeyCipherText.txt");
         String key = getKey();
-        decrypt messageDecryption = new decrypt(cipherText.getCipherText(), key);
-        System.out.println("Plain text: " + messageDecryption.plainText);
+        decrypt messageDecryption = new decrypt(cipherText, key);
+        System.out.println("The key you used is: " + key);
     }
 
     /**

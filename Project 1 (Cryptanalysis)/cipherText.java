@@ -6,11 +6,12 @@
  * the object to get the cipher text.
  **/
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.FileWriter;
 
 public class cipherText {
-    final String cipherText;
+    final StringBuilder cipherText;
     final letterFrequencyObject[] letterFrequency, sortedLetterFrequency;
 
     /**
@@ -26,35 +27,35 @@ public class cipherText {
     }
 
     /**
-     * Reads the cipher text from a file and returns it as a string.
+     * Reads the cipher text from a file and returns it as a string,
+     * while preserving spaces and new lines.
      * 
      * @param fileName the name of the file containing the cipher text
      * @return the cipher text as a string
      */
-    private String readCipherText(String fileName) {
-        String cipherText = "";
+    private StringBuilder readCipherText(String fileName) {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String line = reader.readLine();
-            while (line != null) {
-                cipherText += line;
-                line = reader.readLine();
+            StringBuilder cipherText = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                cipherText.append(line).append("\n"); // This will preserve line breaks
             }
             reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return cipherText;
-    } // end readCipherText
 
-    /**
-     * Returns the cipher text as a string.
-     * 
-     * @return the cipher text as a string
-     */
-    public String getCipherText() {
-        return this.cipherText;
-    } // end getCipherText
+            // Output the cipher text to uniquie file
+            String outputFileName = "JoeyCipherTextTest.txt";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
+            writer.write(cipherText.toString());
+            writer.close();
+            System.out.println("Cipher text written to " + outputFileName);
+
+            return cipherText;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      * Performs frequency analysis on the cipher text and returns the results as
