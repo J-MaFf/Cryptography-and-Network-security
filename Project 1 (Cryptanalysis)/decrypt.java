@@ -1,3 +1,6 @@
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class decrypt {
     final String cipherText, key;
     String plainText;
@@ -45,5 +48,16 @@ public class decrypt {
         }
 
         return plainText;
+    }
+
+    public void toTextFile(String fileName) {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName);
+            fileWriter.write(this.plainText);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 }

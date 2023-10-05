@@ -7,6 +7,8 @@ public class runner {
         cipherText cipherText = new cipherText("JoeyCipherText.txt");
         String key = getKey();
         decrypt messageDecryption = new decrypt(cipherText.getCipherText(), key);
+        // Output to text file (Keep spaces and line breaks)
+        messageDecryption.toTextFile("JoeyPlainText.txt");
         System.out.println("Plain text: " + messageDecryption.plainText);
     }
 

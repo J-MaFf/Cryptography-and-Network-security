@@ -43,7 +43,6 @@ public class cipherText {
                 sb.append(line);
                 sb.append(System.lineSeparator());
                 line = reader.readLine();
-                System.out.println(line);
             }
             reader.close();
         } catch (IOException e) {
