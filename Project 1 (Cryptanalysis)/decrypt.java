@@ -45,10 +45,8 @@ public class decrypt {
         // Formating is a top priority, so I'm going to do this the long way
         for (int i = 0; i < this.decryptThis.cipherText.length(); i++) {
             char cipherTextLetter = this.decryptThis.cipherText.charAt(i);
-            if (cipherTextLetter == ' ') {
-                plainText.append(' ');
-            } else if (cipherTextLetter == '\n') {
-                plainText.append('\n');
+            if (cipherTextLetter < 'A' || cipherTextLetter > 'Z') {
+                plainText.append(cipherTextLetter);
             } else {
                 for (int j = 0; j < letterPairs.length; j++) {
                     // Letter 1 = cipher text letter, letter 2 = plain text letter
@@ -57,18 +55,6 @@ public class decrypt {
                     }
                 }
             }
-
-            /**
-             * for (int i = 0; i < this.decryptThis.cipherText.length(); i++) {
-             * char cipherTextLetter = this.decryptThis.cipherText.charAt(i);
-             * for (int j = 0; j < letterPairs.length; j++) {
-             * // Letter 1 = cipher text letter, letter 2 = plain text letter
-             * if (cipherTextLetter == letterPairs[j].letter1) {
-             * plainText.append(letterPairs[j].letter2);
-             * }
-             * }
-             * }
-             */
 
         }
         // Output the PLAIN text to uniquie file
