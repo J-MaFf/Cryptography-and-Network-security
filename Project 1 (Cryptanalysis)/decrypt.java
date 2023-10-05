@@ -63,6 +63,7 @@ public class decrypt {
             BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
             writer.write(plainText.toString());// check this
             writer.close();
+            System.out.println("Plain text: " + plainText.toString());
             System.out.println("Plain text written to " + outputFileName);
             return plainText;
         } catch (Exception e) {

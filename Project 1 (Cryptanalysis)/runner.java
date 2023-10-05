@@ -7,6 +7,7 @@ public class runner {
         cipherText cipherText = new cipherText("JoeyCipherText.txt");
         String key = getKey();
         decrypt messageDecryption = new decrypt(cipherText, key);
+        System.out.println("The key you used is: " + key);
     }
 
     /**
