@@ -97,8 +97,9 @@ public class RainbowTable {
     // print table
     public void print() {
         for (Map.Entry<String, String> entry : table.entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+            System.out.printf("%-20s %s%n", entry.getKey(), entry.getValue());
         }
+        System.out.println("\n");
     }
 
     public Map<String, String> getTable() {

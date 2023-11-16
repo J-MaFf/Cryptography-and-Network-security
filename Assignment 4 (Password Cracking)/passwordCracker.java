@@ -96,7 +96,7 @@ public class passwordCracker {
 
         String password1 = new passwordCracker().crackPassword(target1hash, possiblePasswords1);
 
-        System.out.println("The password is: " + password1);
+        System.out.println("The password is: " + password1 + "\n\n");
 
         String target2hash = "7e985df169d043112b23508a81e16538";
 
@@ -116,10 +116,57 @@ public class passwordCracker {
                 add("Anything related to The Beatles");
             }
         };
-        List<String> possiblePasswords2 = generatePossiblePasswords(personalData); // Generate possible
+        // List<String> possiblePasswords2 = generatePossiblePasswords(personalData); //
+        // dosent work
+        ArrayList<String> possiblePasswords2 = new ArrayList<String>() {
+            {
+                add("AlicePearson");
+                add("AliceBeatles");
+                add("AliceWhitewater");
+                add("1983Whitewater");
+                add("PearsonAlice");
+                add("PearsonPurple");
+                add("PearsonVolley");
+                add("PearsonBeatles");
+                add("PearsonCyber");
+                add("PearsonWhitewater");
+                add("PurplePearson");
+                add("PurpleVolley");
+                add("PurpleBeatles");
+                add("PurpleWhitewater");
+                add("VolleyPearson");
+                add("VolleyPurple");
+                add("VolleyBeatles");
+                add("VolleyWhitewater");
+                add("FishWhitewater");
+                add("BeatlesAlice");
+                add("BeatlesPearson");
+                add("BeatlesPurple");
+                add("BeatlesVolley");
+                add("BeatlesCyber");
+                add("BeatlesWhitewater");
+                add("UWWWhitewater");
+                add("CyberPearson");
+                add("CyberBeatles");
+                add("CyberWhitewater");
+                add("WhitewaterAlice");
+                add("Whitewater1983");
+                add("WhitewaterPearson");
+                add("WhitewaterPurple");
+                add("WhitewaterVolley");
+                add("WhitewaterFish");
+                add("WhitewaterBeatles");
+                add("WhitewaterUWW");
+                add("WhitewaterCyber");
+                add("Whitewater11");
+                add("Whitewater83");
+                add("11Whitewater");
+                add("83Whitewater");
+            }
+        };
         String password2 = new passwordCracker().crackPassword(target2hash, possiblePasswords2);
 
-        System.out.println("The password is: " + password2);
+        System.out.println("The password is: " + password2 + "\n\n");
 
     }
 
@@ -142,6 +189,7 @@ public class passwordCracker {
 
     public String crackPassword(String targetHash, List<String> possiblePasswords) { // Rainbow table method
         RainbowTable table = new RainbowTable(possiblePasswords); // Initialize rainbow table
+        table.print(); // Print rainbow table
 
         for (String key : table.getTable().keySet()) { // Iterate through keys in rainbow table
             if (table.getTable().get(key).equals(targetHash)) { // Check if hash matches target hash
@@ -153,6 +201,8 @@ public class passwordCracker {
 
     public static List<String> generatePossiblePasswords(List<String> personalData) {
         List<String> possiblePasswords = new ArrayList<>();
+        // RainbowTable table = new RainbowTable(20);
+        // table.print();
 
         for (String data : personalData) {
             // Check if the data length is within the old password constraints
@@ -161,12 +211,7 @@ public class passwordCracker {
                 for (int i = 12; i <= 20; i++) {
                     StringBuilder extendedPassword = new StringBuilder(data);
                     while (extendedPassword.length() < i) {
-                        // Append numbers and letters to meet the new length requirement
-                        // This is a simple example, you can use more complex logic
-                        extendedPassword.append("1"); // Example of appending a number
-                        if (extendedPassword.length() < i) {
-                            extendedPassword.append("a"); // Example of appending a letter
-                        }
+                        extendedPassword.append(data);
                     }
                     possiblePasswords.add(extendedPassword.toString());
                 }
