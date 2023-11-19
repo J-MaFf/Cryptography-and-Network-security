@@ -13,12 +13,6 @@ public class User {
         this.scanner = new Scanner(System.in);
     }
 
-    public User(String username, String password, String key) {
-        this.username = username;
-        this.password = password;
-        this.key = key;
-    }
-
     public void createAccount() {
         // Create a new account
         System.out.println("Enter a username: ");
