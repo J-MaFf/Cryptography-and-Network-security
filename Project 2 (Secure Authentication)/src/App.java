@@ -36,14 +36,13 @@ public class App {
             System.out.println("Invalid choice, please try again");
             choice = scanner.nextLine();
         }
-        if (choice == "1") {
+        if (choice.equals("1")) {
             // Create a new account
-            User newUser = new User();
+            User newUser = new User(key);
             newUser.createAccount();
-            String usernametext = newUser.getUsername();
-            User username = new User();
-        } else {
-            // Log in to an existing account
+        } else if(choice.equals("2")) {
+        	 User oldUser = new User(key);
+             oldUser.login();
         }
 
     }
